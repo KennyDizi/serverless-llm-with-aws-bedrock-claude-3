@@ -52,6 +52,7 @@ def handler(event, _):
             'top_p': 0.999,
             'stop_sequences': ['\n\nHuman:']
         })
+        print(f"CLAUDE_3_MODEL_NAME: {CLAUDE_3_MODEL_NAME}")
         response = bedrock.invoke_model(
             modelId=CLAUDE_3_MODEL_NAME,
             body=body
