@@ -44,5 +44,18 @@ export class ServerlessLlmWithAwsBedrockClaude3Stack extends cdk.Stack {
           },
       }),
     });
+
+    // Configure Lambda Function URL
+    const llmWithBedrockClaude3FnUrl = new cdk.aws_lambda.FunctionUrl(this, `${props.resourcePrefix}-${props.deployRegion}-llmWithBedrockClaude3Fn-Url`, {
+      function: llmWithBedrockClaude3Fn,
+      invokeMode: cdk.aws_lambda.InvokeMode.RESPONSE_STREAM,
+      authType: cdk.aws_lambda.FunctionUrlAuthType.NONE, // or AWS_IAM, based on your security requirements
+    });
+
+    // export the URL of the Lambda Function
+    new cdk.CfnOutput(this, `${props.resourcePrefix}-${props.deployRegion}-llmWithBedrockClaude3Fn-Url`, {
+      value: llmWithBedrockClaude3FnUrl.url,
+      description: `The URL of the Lambda Function.`,
+    });
   }
 }
