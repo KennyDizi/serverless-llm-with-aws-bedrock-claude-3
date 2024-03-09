@@ -1,14 +1,51 @@
-# Welcome to your CDK TypeScript project
+# Serverless LLM with AWS Bedrock Claude-3
 
-This is a blank project for CDK development with TypeScript.
+A serverless application that utilizes AWS Bedrock Claude-3 for natural language processing tasks. This application is built using AWS CDK and is designed to be deployed across multiple regions and environments.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Features
 
-## Useful commands
+- Utilizes AWS Lambda and Bedrock Claude-3 for processing natural language inputs.
+- Supports multi-region deployment through AWS CDK.
+- Includes typescript and python lambda function examples.
+- Environment variables for flexible configuration.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+## Requirements
+
+- AWS CLI
+- Node.js and npm
+- AWS CDK
+- Python 3.11 or higher
+
+## Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/KennyDizi/serverless-llm-with-aws-bedrock-claude-3
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Set up your environment variables in a `.env` file based on the `.env.example` template.
+
+4. Build the typescript files:
+
+```bash
+npm run build
+```
+
+## Deployment
+
+Deploy the application to your default AWS account/region:
+
+```bash
+npx cdk deploy
+```
+
+## Check model avaibility on your region via
+
+<https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html>
