@@ -44,3 +44,8 @@ Deploy the application to your default AWS account/region:
 
 ```bash
 npx cdk deploy
+```
+
+## Check model avaibility on your region via
+
+<https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html>
