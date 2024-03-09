@@ -1,9 +1,9 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { ServerlessLlmWithAwsBedrockClaude3StackProps } from './ServerlessLlmWithAwsBedrockClaude3StackProps';
 
 export class ServerlessLlmWithAwsBedrockClaude3Stack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: ServerlessLlmWithAwsBedrockClaude3StackProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here
