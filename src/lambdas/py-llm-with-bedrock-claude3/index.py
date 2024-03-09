@@ -28,34 +28,43 @@ def handler(event, _):
     logger.info("event: %s", event)
     print(f"CLAUDE_3_MODEL_NAME: {CLAUDE_3_MODEL_NAME}")
     print(f"AWS_LWA_INVOKE_MODE: {AWS_LWA_INVOKE_MODE}")
-    # get the topic from the event
-    topic = event['topic']
-    if not topic:
+    try:
+        # get the topic from the event
+        topic = event['body']['topic']
+        if not topic:
+            return {
+                'statusCode': 400,
+                'body': json.dumps({
+                    'error': 'missing topic'
+                })
+            }
+        instruction = f"""
+        You are a world class writer. Please write a sweet bedtime story about {topic}.
+        """
+        body = json.dumps({
+            'prompt': f'Human:{instruction}\n\nAssistant:',
+            'max_tokens_to_sample': 1028,
+            'temperature': 1,
+            'top_k': 250,
+            'top_p': 0.999,
+            'stop_sequences': ['\n\nHuman:']
+        })
+        response = bedrock.invoke_model(
+            modelId=CLAUDE_3_MODEL_NAME,
+            body=body
+        )
+        response_body = json.loads(response.get('body').read())
+
+        output_text = response_body.get('results')[0].get('outputText')
         return {
-            'statusCode': 400,
+            'statusCode': 200,
+            'body': output_text
+        }
+    except Exception as e:
+        logger.error("Error: %s", e)
+        return {
+            'statusCode': 500,
             'body': json.dumps({
-                'error': 'missing topic'
+                'error': str(e)
             })
         }
-    instruction = f"""
-    You are a world class writer. Please write a sweet bedtime story about {topic}.
-    """
-    body = json.dumps({
-        'prompt': f'Human:{instruction}\n\nAssistant:',
-        'max_tokens_to_sample': 1028,
-        'temperature': 1,
-        'top_k': 250,
-        'top_p': 0.999,
-        'stop_sequences': ['\n\nHuman:']
-    })
-    response = bedrock.invoke_model(
-        modelId=CLAUDE_3_MODEL_NAME,
-        body=body
-    )
-    response_body = json.loads(response.get('body').read())
-
-    output_text = response_body.get('results')[0].get('outputText')
-    return {
-        'statusCode': 200,
-        'body': output_text
-    }
