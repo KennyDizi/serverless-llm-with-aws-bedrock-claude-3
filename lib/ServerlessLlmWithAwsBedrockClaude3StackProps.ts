@@ -1,6 +1,7 @@
 import { StackProps } from "aws-cdk-lib";
-
-
+/**
+ * The properties for the ServerlessLlmWithAwsBedrockClaude3Stack.
+ */
 export interface ServerlessLlmWithAwsBedrockClaude3StackProps extends StackProps {
     /**
      * The name of the model.
@@ -13,7 +14,7 @@ export interface ServerlessLlmWithAwsBedrockClaude3StackProps extends StackProps
     /**
      * The region where the application will be deployed.
      */
-    readonly deployRegion: string;
+    readonly deployRegion: string | undefined;
     /**
      * The environment for the application, e.g., "dev".
      */
