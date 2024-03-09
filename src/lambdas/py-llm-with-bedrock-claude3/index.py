@@ -31,7 +31,7 @@ def handler(event, _):
     try:
         # get the topic from the event
         event_body = json.loads(event['body'])
-        print(f"body: {body}")
+        print(f"body: {event_body}")
         # extract the topic from the body
         topic = event_body['topic']
         if not topic:
