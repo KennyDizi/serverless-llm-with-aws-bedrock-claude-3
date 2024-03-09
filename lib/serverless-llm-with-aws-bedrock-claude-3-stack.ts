@@ -37,7 +37,7 @@ export class ServerlessLlmWithAwsBedrockClaude3Stack extends cdk.Stack {
               bedrockPolicy: new cdk.aws_iam.PolicyDocument({
                   statements: [
                       new cdk.aws_iam.PolicyStatement({
-                          actions: ['bedrock:Invoke', 'bedrock:InvokeModelWithResponseStream'],
+                          actions: ['bedrock:Invoke', 'bedrock:InvokeModelWithResponseStream', 'bedrock:InvokeModel'],
                           resources: ['*'],
                       }),
                   ],
