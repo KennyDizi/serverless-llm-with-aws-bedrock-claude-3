@@ -25,6 +25,7 @@ export class ServerlessLlmWithAwsBedrockClaude3Stack extends cdk.Stack {
       }),
       environment: {
         CLAUDE_3_MODEL_NAME: props.claude3ModelName,
+        AWS_LWA_INVOKE_MODE: 'RESPONSE_STREAM',
       },
       role: new cdk.aws_iam.Role(this, `${props.resourcePrefix}-${props.deployRegion}-llmWithBedrockClaude3Fn-Role`, {
           assumedBy: new cdk.aws_iam.ServicePrincipal('lambda.amazonaws.com'),
@@ -36,7 +37,7 @@ export class ServerlessLlmWithAwsBedrockClaude3Stack extends cdk.Stack {
               bedrockPolicy: new cdk.aws_iam.PolicyDocument({
                   statements: [
                       new cdk.aws_iam.PolicyStatement({
-                          actions: ['bedrock:Invoke'],
+                          actions: ['bedrock:Invoke', 'bedrock:InvokeModelWithResponseStream'],
                           resources: ['*'],
                       }),
                   ],
