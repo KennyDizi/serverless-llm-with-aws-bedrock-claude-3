@@ -30,9 +30,10 @@ def handler(event, _):
     print(f"AWS_LWA_INVOKE_MODE: {AWS_LWA_INVOKE_MODE}")
     try:
         # get the topic from the event
-        body_string = event['body']
-        body = json.loads(body_string)
-        topic = body.get('topic')
+        event_body = json.loads(event['body'])
+        print(f"body: {body}")
+        # extract the topic from the body
+        topic = event_body['topic']
         if not topic:
             return {
                 'statusCode': 400,
